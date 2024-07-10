@@ -1,6 +1,6 @@
 # case-study
 
-Step 1: Install kops and kubectl
+## Step 1: Install kops and kubectl
 To set up your Kubernetes cluster, you need to install kops and kubectl on your local machine. Follow the steps below:
 
 Install kops
@@ -23,3 +23,7 @@ sudo mv kubectl /usr/local/bin/kubectl
 ```
 By following these steps, you will have kops and kubectl installed on your local machine, ready to manage your Kubernetes cluster.
 
+## Create an S3 bucket for kops state store
+```bash
+aws s3api create-bucket --bucket my-kops-state-store --region us-east-
+```
