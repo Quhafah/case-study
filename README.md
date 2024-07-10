@@ -45,11 +45,11 @@ kubectl apply -f hpa.yaml
 
 ## Create Docker Images
     - Build and push the Docker image
-    ```bash
+
     docker build -t my-web-app:latest .
     docker tag my-web-app:latest <dockerhub-username>/my-web-app:latest
     docker push <dockerhub-username>/my-web-app:latest
-    ```
+    
 
 ## Apply the Deployment
 ```bash
@@ -90,13 +90,12 @@ ansible-playbook deploy.yml
 
 ## Creating and Managing Secrets
     - Encode your AWS access key and secret key in base64
-    ```bash
         echo -n 'your-aws-access-key' | base64
         echo -n 'your-aws-secret-key' | base64
-    ``` 
+     
     Replace <base64-encoded-access-key> and <base64-encoded-secret-key> with the base64-encoded values
 
     Apply Secrets
-    ```bash
+
         kubectl apply -f aws-secret.yaml
-    ```
+    
