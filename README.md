@@ -27,3 +27,76 @@ By following these steps, you will have kops and kubectl installed on your local
 ```bash
 aws s3api create-bucket --bucket my-kops-state-store --region us-east-
 ```
+## Create the cluster command
+```bash
+kops create -f cluster.yaml
+kops update cluster mycluster.k8s.local --yes
+kops validate cluster
+```
+## Apply the Kubernetes Objects
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+## Apply the Horizontal Pod Autoscaler
+```bash
+kubectl apply -f hpa.yaml
+```
+
+## Create Docker Images
+    - Build and push the Docker image
+    ```bash
+    docker build -t my-web-app:latest .
+    docker tag my-web-app:latest <dockerhub-username>/my-web-app:latest
+    docker push <dockerhub-username>/my-web-app:latest
+    ```
+
+## Apply the Deployment
+```bash
+kubectl apply -f deployment.yaml
+```
+
+## Setting up S3 Lifecycle Policies
+```bash
+aws s3api put-bucket-lifecycle-configuration --bucket my-s3-bucket --lifecycle-configuration file://lifecycle.json
+```
+
+## Using Helm for Reusability
+
+```helm
+my-helm-chart/
+├── charts/
+├── templates/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── hpa.yaml
+├── Chart.yaml
+└── values.yaml
+```
+
+## Deploy Helm Chart
+
+```bash
+helm install my-web-app ./my-helm-chart
+```
+
+
+## Run the Ansible playbook
+```bash
+cd ansible
+ansible-playbook deploy.yml
+```
+
+
+## Creating and Managing Secrets
+    - Encode your AWS access key and secret key in base64
+    ```bash
+        echo -n 'your-aws-access-key' | base64
+        echo -n 'your-aws-secret-key' | base64
+    ``` 
+    Replace <base64-encoded-access-key> and <base64-encoded-secret-key> with the base64-encoded values
+
+    Apply Secrets
+    ```bash
+        kubectl apply -f aws-secret.yaml
+    ```
