@@ -5,29 +5,19 @@ To set up your Kubernetes cluster, you need to install kops and kubectl on your 
 
 Install kops
 Download the kops binary:
-bash
-Copy code
+```bash
 curl -LO https://github.com/kubernetes/kops/releases/download/v1.21.0/kops-linux-amd64
 Make the kops binary executable:
-bash
-Copy code
 chmod +x kops-linux-amd64
 Move the kops binary to a directory in your PATH:
-bash
-Copy code
 sudo mv kops-linux-amd64 /usr/local/bin/kops
 Install kubectl
 Download the kubectl binary:
-bash
-Copy code
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 Make the kubectl binary executable:
-bash
-Copy code
 chmod +x kubectl
 Move the kubectl binary to a directory in your PATH:
-bash
-Copy code
 sudo mv kubectl /usr/local/bin/kubectl
+```
 By following these steps, you will have kops and kubectl installed on your local machine, ready to manage your Kubernetes cluster.
 
